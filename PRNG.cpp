@@ -1,11 +1,19 @@
 #include "PRNG.h"
+#include <chrono>
 
 PRNG::PRNG() {
     int seed = time(0);
 }
 
+long PRNG::getSeed() {
+    auto now = std::chrono::high_resolution_clock::now();
+    auto now_ns = std::chrono::time_point_cast<std::chrono::nanoseconds>(now);
+    auto epoch = now_ns.time_since_epoch();
+    return epoch.count();
+}
+
 float PRNG::getNum(float lowerBound, float upperBound) {
-    return (WichmannHillAlgo(1,2,3)*(upperBound-lowerBound)) + lowerBound;
+    return (WichmannHillAlgo(PRNG::getSeed(), PRNG::getSeed(), PRNG::getSeed())*(upperBound-lowerBound)) + lowerBound;
 }
 
 float PRNG::WichmannHillAlgo(int s1, int s2, int s3) {
