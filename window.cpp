@@ -5,6 +5,15 @@ Window::Window() {
     set_title("Worst Sorting Algorithms");
     set_border_width(10);
     m_grid.set_orientation(Gtk::ORIENTATION_VERTICAL);
+
+    //Setup dropdown menu
+    m_sortDropDownMenu.append("Pick a sorting algorithm");
+    m_sortDropDownMenu.append("Sorting Algorithm 1");
+    m_sortDropDownMenu.append("Sorting Algorithm 2");
+    m_sortDropDownMenu.append("Sorting Algorithm 3");
+    m_sortDropDownMenu.set_active(0);
+    m_sortDropDownMenu.signal_changed().connect(sigc::mem_fun(*this, &Window::on_combo_changed));
+    m_grid.add(m_sortDropDownMenu);
     
     //Setup button
     m_sortButton.add_label("Sort");
@@ -22,5 +31,13 @@ Window::~Window() {
 }
 
 void Window::on_button_clicked() {
-    std::cout << "Sort" << std::endl;
+    std::cout << "Sort using " << m_sortDropDownMenu.get_active_row_number() << std::endl;
+}
+
+void Window::on_combo_changed()
+{
+    Glib::ustring text = m_sortDropDownMenu.get_active_text();
+    if(!(text.empty())) {
+        std::cout << "Combo changed: " << text << std::endl;
+    }
 }
