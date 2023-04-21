@@ -8,5 +8,5 @@ class PRNG {
 
     private:
         float WichmannHillAlgo(int s1, int s2, int s3);
-
+        long getSeed();
 };
