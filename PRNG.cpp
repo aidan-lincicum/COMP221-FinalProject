@@ -2,7 +2,7 @@
 #include <chrono>
 
 PRNG::PRNG() {
-    int seed = time(0);
+    int max = 21473;
 }
 
 long PRNG::getSeed() {
@@ -13,14 +13,19 @@ long PRNG::getSeed() {
 }
 
 float PRNG::getNum(float lowerBound, float upperBound) {
-    return (WichmannHillAlgo(PRNG::getSeed(), PRNG::getSeed(), PRNG::getSeed())*(upperBound-lowerBound)) + lowerBound;
+     return (WichmannHillAlgo(PRNG::getSeed(), PRNG::getSeed(), PRNG::getSeed())*(upperBound-lowerBound)) + lowerBound;
 }
 
-float PRNG::WichmannHillAlgo(int s1, int s2, int s3) {
+float PRNG::WichmannHillAlgo(short s1, short s2, short s3) {
     float s4 = (171 * s1) % 30269;
     float s5 = (172 * s2) % 30307;
     float s6 = (170 * s3) % 30323;
     float r = (s4/30269.0) + (s5/30307.0) + (s6/30323.0);
     r = r - (int) r;
     return r;
+}
+
+int PRNG::abs(int v) {
+    if (v >> 31 & 1 == 1) return ~v - 1;
+    return v;
 }

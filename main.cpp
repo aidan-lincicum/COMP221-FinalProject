@@ -14,9 +14,8 @@ int main(int argc, char** argv) {
 
     // * ======================================================================
     PRNG num;
-    const int fard = 12345;
     for(int i = 0; i < 100; i++) {
-        std::cout << (int) (fard * num.getNum(0,1)) << std::endl;
+        std::cout << num.getNum(0,1) << std::endl;
     }
 
     std::cin.ignore();

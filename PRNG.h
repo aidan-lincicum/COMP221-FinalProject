@@ -3,10 +3,12 @@
 
 class PRNG {
     public:
+        int max;
         PRNG();
         float getNum(float lowerBound, float upperBound);
+        int abs(int v);
 
     private:
-        float WichmannHillAlgo(int s1, int s2, int s3);
+        float WichmannHillAlgo(short s1, short s2, short s3);
         long getSeed();
 };
