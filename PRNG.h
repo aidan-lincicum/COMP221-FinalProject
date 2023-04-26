@@ -3,6 +3,7 @@
 
 class PRNG {
     public:
+        int max;
         PRNG();
         int getNum(float lowerBound, float upperBound);
         int abs(int v);
