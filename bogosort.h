@@ -1,4 +1,3 @@
-#include "PRNG.h"
 #include "util.h"
 
 class Bogosort {
@@ -7,7 +6,6 @@ class Bogosort {
         bool bogostep();
 
     private:
-        PRNG PRNG;
         util util;
         int * arr;
         int arrSize;

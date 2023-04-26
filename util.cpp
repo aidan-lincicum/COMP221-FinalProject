@@ -1,7 +1,6 @@
-#include "PRNG.h"
 #include "util.h"
 
-util::util() : PRNG() {}
+util::util() {}
 
 
 bool util::isSorted(int *arr, int n) {
