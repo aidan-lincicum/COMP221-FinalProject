@@ -1,16 +1,14 @@
 #include "PRNG.h"
-#include <iostream>
+#include "util.h"
 
 class Bogosort {
     public:
         Bogosort(int * arr, int arrSize);
         bool bogostep();
-        bool isSorted();
-        void shuffle();
 
     private:
-        int *sortArr;
-        int arrSize;
         PRNG PRNG;
-        
+        util util;
+        int * arr;
+        int arrSize;
 };
