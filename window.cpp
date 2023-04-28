@@ -8,8 +8,8 @@ Window::Window() : bogosort(values, sizeValues){
 
     //Setup dropdown menu
     m_sortDropDownMenu.append("Pick a sorting algorithm");
-    m_sortDropDownMenu.append("Sorting Algorithm 1");
-    m_sortDropDownMenu.append("Sorting Algorithm 2");
+    m_sortDropDownMenu.append("Bogosort");
+    m_sortDropDownMenu.append("Miracle Sort");
     m_sortDropDownMenu.append("Sorting Algorithm 3");
     m_sortDropDownMenu.set_active(0);
     m_sortDropDownMenu.signal_changed().connect(sigc::mem_fun(*this, &Window::on_combo_changed));
@@ -33,20 +33,27 @@ Window::~Window() {
 
 void Window::on_button_clicked() {
     bool isSorted = false;
-    while(!isSorted) {
-        isSorted = bogosort.bogostep();
-        sortGraphic.queue_draw();   
-        while (gtk_events_pending()) {
-            gtk_main_iteration();
-        }
-        Sleep(100);
+    switch(m_sortDropDownMenu.get_active_row_number()) {
+        case 1:
+            while(!isSorted) {
+                isSorted = bogosort.bogostep();
+                sortGraphic.queue_draw();   
+                while (gtk_events_pending()) {
+                    gtk_main_iteration();
+                }
+                Sleep(100);
+            }
+            break;
+        case 2:
+            util.shuffle(values, sizeValues);
+            while(!isSorted) {
+                isSorted = util.isSorted(values, sizeValues);
+                sortGraphic.queue_draw(); 
+                while (gtk_events_pending()) {
+                    gtk_main_iteration();
+                }
+            }
     }
 }
 
-void Window::on_combo_changed()
-{
-    Glib::ustring text = m_sortDropDownMenu.get_active_text();
-    if(!(text.empty())) {
-        std::cout << "Combo changed: " << text << std::endl;
-    }
-}
+void Window::on_combo_changed() {}

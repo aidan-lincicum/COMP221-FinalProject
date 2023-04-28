@@ -29,4 +29,5 @@ class Window : public Gtk::Window {
         SortGraphic sortGraphic;
         Gtk::ComboBoxText m_sortDropDownMenu;
         Bogosort bogosort;
+        util util;
 };
