@@ -10,7 +10,7 @@ Window::Window() : bogosort(values, sizeValues){
     m_sortDropDownMenu.append("Pick a sorting algorithm");
     m_sortDropDownMenu.append("Bogosort");
     m_sortDropDownMenu.append("Miracle Sort");
-    m_sortDropDownMenu.append("Sorting Algorithm 3");
+    m_sortDropDownMenu.append("Bogobogosort");
     m_sortDropDownMenu.set_active(0);
     m_sortDropDownMenu.signal_changed().connect(sigc::mem_fun(*this, &Window::on_combo_changed));
     m_grid.add(m_sortDropDownMenu);
@@ -53,8 +53,24 @@ void Window::on_button_clicked() {
                     gtk_main_iteration();
                 }
             }
+        case 3:
+            util.shuffle(values, sizeValues);
+            bogobogo(values, sizeValues);
     }
 }
 
 void Window::on_combo_changed() {}
 
+void Window::bogobogo(int * arr, int arrSize) {
+    bool isSorted = util.isSorted(arr, arrSize);
+    while(!isSorted) {
+        util.shuffle(arr, arrSize);
+        sortGraphic.queue_draw(); 
+        while (gtk_events_pending()) {
+            gtk_main_iteration();
+        }
+        Sleep(10);
+        bogobogo(arr, arrSize - 1);
+        isSorted = util.isSorted(arr, arrSize);
+    }
+}

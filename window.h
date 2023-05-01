@@ -20,6 +20,7 @@ class Window : public Gtk::Window {
     protected:
         void on_button_clicked();
         void on_combo_changed();
+        void bogobogo(int * arr, int arrSize);
 
         int values[5] = {10,20,30,40,50};
         int sizeValues = 5;
